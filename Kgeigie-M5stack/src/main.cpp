@@ -1,7 +1,7 @@
 // Test for displaying CPM and uS/h for kGeigie stickC version V3
 
 #include <M5Stack.h>
-#include </Users/rob/Documents/Arduino/libraries/M5Stack/src/Fonts/Custom/FreeSevenSegNumFont.h>
+#include </home/rob/Documents/Fonts/FreeSevenSegNumFont.h>
 
 // Stock font and GFXFF reference handle
 #define GFXFF 1
