@@ -1,4 +1,4 @@
-// Test for displaying CPM and uS/h for kGeigie
+// Test for displaying CPM and uS/h for kGeigie stickC version V2
 
 #include <M5Stack.h>
 #include </home/rob/Documents/Fonts/FreeSevenSegNumFont.h>
