@@ -134,7 +134,7 @@ void setup(void) {
 }
 int secondloop(float totalminutes, float count){
     // add random count
-    count=random(20);
+    count=random(40,50);
     
     //add random count plus total counts
      totalminutes=totalminutes+count;
@@ -150,7 +150,7 @@ int secondloop(float totalminutes, float count){
 
 void loop() {
     M5.update();
-    count=count+random (10);
+    count=count+random (40,50);
     //display menu of button options
     if (button==0) {
     M5.Lcd.setCursor(0,15); //51
