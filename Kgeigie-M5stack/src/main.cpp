@@ -132,14 +132,25 @@ void setup(void) {
       M5.Lcd.fillRect(0, 0, 200, 200, BLACK); //clear display
 
 }
-void secondloop(float totalminutes, float count){
-  totalminutes=totalminutes+count;
+int secondloop(float totalminutes, float count){
+    // add random count
+    count=random(20);
+    
+    //add random count plus total counts
+     totalminutes=totalminutes+count;
 
-    Serial.print("totalminutes=");
+    //serial print the info
+    Serial.print("second loop totalminutes=");
     Serial.println(totalminutes); 
+
+    //return the random count
+    return totalminutes;
 }
+
+
 void loop() {
     M5.update();
+    count=count+random (10);
     //display menu of button options
     if (button==0) {
     M5.Lcd.setCursor(0,15); //51
@@ -189,8 +200,14 @@ void loop() {
      }
      lastcount = count; 
      
+     
     if (millis()-timePreviousMeassure > 60000){
         secondloop(totalminutes, count);
+        //check return count
+        Serial.print ("totalminutes=");
+        Serial.println (totalminutes);
+
+        //continue
         totalminutes++;
         minutesdisplay++;
         averageCPM = (totalcount/(totalminutes)) - background; //+ (1/60)*seconds);
