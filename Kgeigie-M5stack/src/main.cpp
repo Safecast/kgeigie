@@ -125,7 +125,7 @@ void setup(void) {
                     //totalcount++;
                }
                lastcount = count;
-               //totalcount = count;
+               totalcount = count;
 
         }
       }
@@ -149,7 +149,7 @@ void loop() {
     M5.Lcd.print("Background");
     iteration++;
     }
-    float countPerMinute = count;
+    //float countPerMinute = count;
     //M5.Lcd.setCursor(0,50);
     //M5.Lcd.print("Count Sum=");
     //M5.Lcd.setCursor(100,50);
@@ -191,7 +191,7 @@ void loop() {
         totalminutes++;
         minutesdisplay++;
         averageCPM = (totalcount/(totalminutes)) - background; //+ (1/60)*seconds);
-        float avgradval = averageCPM * CONV_FACTOR;
+        float avgradval = averageCPM * CONV_FACTOR; 
         float countPerMinute = count;
         float radiationValue = countPerMinute * CONV_FACTOR;
       //setup counting and display sieverts
@@ -292,7 +292,7 @@ void loop() {
         M5.Lcd.print(totalcount, 0);
         M5.Lcd.setCursor(0,15);
         M5.Lcd.print("Avg CPM =");
-        M5.Lcd.println(averageCPM, 3);
+        M5.Lcd.println(averageCPM, 0);
         M5.Lcd.setCursor(0,30);
         M5.Lcd.print("Avg uSv/h =");
         M5.Lcd.println(avgradval, 3);
