@@ -52,11 +52,11 @@ void setup(void) {
 //draw Safecast Logo
   M5.Lcd.setFreeFont(FF17);  
   M5.Lcd.setRotation(3);
-  //M5.Lcd.drawLine(10, 5, 50, 30, WHITE);
-  //M5.Lcd.drawLine(50,30,50, 65, WHITE);
-  //M5.Lcd.drawLine(10, 17, 40, 35, WHITE);
-  //M5.Lcd.drawLine(40,35,40, 65, WHITE);
-  //M5.Lcd.fillCircle(20, 50, 10, BLUE);
+  M5.Lcd.drawLine(10, 5, 50, 30, WHITE);
+  M5.Lcd.drawLine(50,30,50, 65, WHITE);
+  M5.Lcd.drawLine(10, 17, 40, 35, WHITE);
+  M5.Lcd.drawLine(40,35,40, 65, WHITE);
+  M5.Lcd.fillCircle(20, 50, 10, BLUE);
   M5.Lcd.setCursor(55,30); //51
   M5.Lcd.print("SAFECAST");
   M5.Lcd.setCursor(80,50);
@@ -132,8 +132,11 @@ void setup(void) {
       M5.Lcd.fillRect(0, 0, 200, 200, BLACK); //clear display
 
 }
-void secondloop(){
-    Serial.print("one second thing"); 
+void secondloop(float totalminutes, float count){
+  totalminutes=totalminutes+count;
+
+    Serial.print("totalminutes=");
+    Serial.println(totalminutes); 
 }
 void loop() {
     M5.update();
@@ -187,7 +190,7 @@ void loop() {
      lastcount = count; 
      
     if (millis()-timePreviousMeassure > 60000){
-        secondloop();
+        secondloop(totalminutes, count);
         totalminutes++;
         minutesdisplay++;
         averageCPM = (totalcount/(totalminutes)) - background; //+ (1/60)*seconds);
@@ -204,14 +207,14 @@ void loop() {
           Serial.print(" - ");
           Serial.print("uSv/h = ");
           Serial.println(radiationValue);
-          Serial.print("Total Count = ");
+          Serial.print(" Total Count = ");
           Serial.print(totalcount);   
-          Serial.print("Time Elapsed: ");
+          Serial.print(" Time Elapsed: ");
           Serial.print(totalminutes);
-          Serial.print("Average CPM = ");
+          Serial.print(" Average CPM = ");
           Serial.print(averageCPM);
-          Serial.print("Average uSv/h = ");
-          Serial.print(avgradval);
+          Serial.print(" Average uSv/h = ");
+          Serial.println(avgradval);
 
 //old format
       //Display CPM  
