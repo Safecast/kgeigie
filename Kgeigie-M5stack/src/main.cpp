@@ -52,11 +52,11 @@ void setup(void) {
 //draw Safecast Logo
   M5.Lcd.setFreeFont(FF17);  
   M5.Lcd.setRotation(3);
-  M5.Lcd.drawLine(10, 5, 50, 30, WHITE);
-  M5.Lcd.drawLine(50,30,50, 65, WHITE);
-  M5.Lcd.drawLine(10, 17, 40, 35, WHITE);
-  M5.Lcd.drawLine(40,35,40, 65, WHITE);
-  M5.Lcd.fillCircle(20, 50, 10, BLUE);
+  //M5.Lcd.drawLine(10, 5, 50, 30, WHITE);
+  //M5.Lcd.drawLine(50,30,50, 65, WHITE);
+  //M5.Lcd.drawLine(10, 17, 40, 35, WHITE);
+  //M5.Lcd.drawLine(40,35,40, 65, WHITE);
+  //M5.Lcd.fillCircle(20, 50, 10, BLUE);
   M5.Lcd.setCursor(55,30); //51
   M5.Lcd.print("SAFECAST");
   M5.Lcd.setCursor(80,50);
@@ -109,7 +109,7 @@ void setup(void) {
               //delay(10);
               M5.Lcd.print(seconds);
         //Display safecast copyright
-              M5.Lcd.drawString("SAFECAST 2020", 0, 50, GFXFF);
+              M5.Lcd.drawString("TEST", 0, 50, GFXFF);
 
         //   //Beep
                if (lastcount<count) {
@@ -125,7 +125,7 @@ void setup(void) {
                     //totalcount++;
                }
                lastcount = count;
-               totalcount = count;
+               //totalcount = count;
 
         }
       }
@@ -252,11 +252,11 @@ void loop() {
     if (button == 1) {
         M5.Lcd.fillRect(0, 0, 200, 35, BLACK);
         M5.Lcd.setCursor(0,15);
-        M5.Lcd.print("Avg CPM =");
+        M5.Lcd.print("Average CPM =");
         M5.Lcd.println(averageCPM, 0);
         M5.Lcd.setCursor(0,30);
         M5.Lcd.print("Avg uSv/h =");
-        M5.Lcd.println(avgradval, 3);
+        M5.Lcd.println(avgradval,0);
     }
     if (button ==2){
         M5.Lcd.fillRect(0, 0, 200, 35, BLACK);
@@ -278,21 +278,26 @@ void loop() {
         M5.Lcd.setCursor(70,70);
         M5.Lcd.print(minutesdisplay);
         M5.Lcd.println("m");
+        M5.Lcd.setCursor(0,50);
+        M5.Lcd.print("Count Sum=");
+        M5.Lcd.setCursor(100,50);
+        M5.Lcd.print(totalcount, 0);
     }
     }
     //float countPerMinute = count;
     //float radiationValue = countPerMinute * CONV_FACTOR;
     //float avgradval = averageCPM * CONV_FACTOR;
       //Reset the counts and reset the count down
+    //float avgradval = averageCPM * CONV_FACTOR; 
     if (M5.BtnA.wasReleased()) {
-        M5.Lcd.fillRect(0, 0, 200, 200, BLACK);
+        M5.Lcd.fillRect(0, 0, 200, 200, RED);
         M5.Lcd.setCursor(0,50);
         M5.Lcd.print("Count Sum=");
         M5.Lcd.setCursor(100,50);
         M5.Lcd.print(totalcount, 0);
         M5.Lcd.setCursor(0,15);
-        M5.Lcd.print("Avg CPM =");
-        M5.Lcd.println(averageCPM, 0);
+        M5.Lcd.print("Averg CPM =");
+        M5.Lcd.println(averageCPM, 1);
         M5.Lcd.setCursor(0,30);
         M5.Lcd.print("Avg uSv/h =");
         M5.Lcd.println(avgradval, 3);
