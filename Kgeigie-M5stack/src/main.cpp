@@ -109,7 +109,7 @@ void setup(void) {
               //delay(10);
               M5.Lcd.print(seconds);
         //Display safecast copyright
-              M5.Lcd.drawString("TEST", 0, 50, GFXFF);
+              M5.Lcd.drawString("Catherine Mohr", 0, 50, GFXFF);
 
         //   //Beep
                if (lastcount<count) {
