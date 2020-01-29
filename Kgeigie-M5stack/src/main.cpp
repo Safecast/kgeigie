@@ -109,7 +109,7 @@ void setup(void) {
               //delay(10);
               M5.Lcd.print(seconds);
         //Display safecast copyright
-              M5.Lcd.drawString("Catherine Mohr", 0, 50, GFXFF);
+              M5.Lcd.drawString("SAFECAST 2020", 0, 50, GFXFF);
 
         //   //Beep
                if (lastcount<count) {
@@ -125,7 +125,7 @@ void setup(void) {
                     //totalcount++;
                }
                lastcount = count;
-               //totalcount = count;
+               totalcount = count;
 
         }
       }
@@ -134,7 +134,7 @@ void setup(void) {
 }
 int secondloop(float totalminutes, float count){
     // add random count
-    count=random(40,50);
+    //count=random(40,50);
     
     //add random count plus total counts
      totalminutes=totalminutes+count;
@@ -150,7 +150,7 @@ int secondloop(float totalminutes, float count){
 
 void loop() {
     M5.update();
-    count=count+random (40,50);
+    //count=count+random (40,50);
     //display menu of button options
     if (button==0) {
     M5.Lcd.setCursor(0,15); //51
@@ -181,7 +181,7 @@ void loop() {
 //         M5.Speaker.mute();
         M5.Lcd.drawCircle(145, 65, 10, RED); //137
         M5.Lcd.fillCircle(145, 65, 10, RED);
-        //totalcount++;
+        totalcount+=count;
         //M5.Lcd.setCursor(100,50);
         //M5.Lcd.fillRect(100, 35, 50, 17, BLACK); //"clear" by overwritting old total with black rect
         //M5.Lcd.setCursor(100,50);
@@ -189,6 +189,9 @@ void loop() {
         delay(500);
         M5.Lcd.drawCircle(145, 65, 10, BLACK);
         M5.Lcd.fillCircle(145, 65, 10, BLACK);
+        //countPerMinute = count;
+
+
 //Count Sum
     if (button >= 1) {
         M5.Lcd.fillRect(100, 35, 70, 17, BLACK);
@@ -272,11 +275,11 @@ void loop() {
     if (button == 1) {
         M5.Lcd.fillRect(0, 0, 200, 35, BLACK);
         M5.Lcd.setCursor(0,15);
-        M5.Lcd.print("Average CPM =");
+        M5.Lcd.print("Avg CPM =");
         M5.Lcd.println(averageCPM, 0);
         M5.Lcd.setCursor(0,30);
         M5.Lcd.print("Avg uSv/h =");
-        M5.Lcd.println(avgradval,0);
+        M5.Lcd.println(avgradval,3);
     }
     if (button ==2){
         M5.Lcd.fillRect(0, 0, 200, 35, BLACK);
@@ -303,21 +306,23 @@ void loop() {
         M5.Lcd.setCursor(100,50);
         M5.Lcd.print(totalcount, 0);
     }
+  count = 0;
+  seconds = 60;
     }
     //float countPerMinute = count;
     //float radiationValue = countPerMinute * CONV_FACTOR;
-    //float avgradval = averageCPM * CONV_FACTOR;
+    float avgradval = averageCPM * CONV_FACTOR;
       //Reset the counts and reset the count down
     //float avgradval = averageCPM * CONV_FACTOR; 
     if (M5.BtnA.wasReleased()) {
-        M5.Lcd.fillRect(0, 0, 200, 200, RED);
+        M5.Lcd.fillRect(0, 0, 200, 200, BLACK);
         M5.Lcd.setCursor(0,50);
         M5.Lcd.print("Count Sum=");
         M5.Lcd.setCursor(100,50);
         M5.Lcd.print(totalcount, 0);
         M5.Lcd.setCursor(0,15);
-        M5.Lcd.print("Averg CPM =");
-        M5.Lcd.println(averageCPM, 1);
+        M5.Lcd.print("Avg CPM =");
+        M5.Lcd.println(averageCPM, 0);
         M5.Lcd.setCursor(0,30);
         M5.Lcd.print("Avg uSv/h =");
         M5.Lcd.println(avgradval, 3);
@@ -343,20 +348,20 @@ void loop() {
     if (M5.BtnB.wasReleased()) {
         M5.Lcd.fillRect(0, 0, 200, 200, BLACK);
         M5.Lcd.setCursor(0,30);
-          M5.Lcd.setFreeFont(FF17); 
-          M5.Lcd.print("uSv/h =");
-          M5.Lcd.setCursor(70,30);
-          M5.Lcd.setFreeFont(FF17);
-          //Display data 
+        M5.Lcd.setFreeFont(FF17); 
+        M5.Lcd.print("uSv/h =");
+        M5.Lcd.setCursor(70,30);
+        M5.Lcd.setFreeFont(FF17);
+        //Display data 
           M5.Lcd.print(radiationValue,3);
         M5.Lcd.setCursor(0,15);
-          M5.Lcd.setFreeFont(FF17);  
-          M5.Lcd.print("CPM =");
-          M5.Lcd.setCursor(70,15);
-          // setup for seven segment fonts
-          M5.Lcd.setFreeFont(FF17);
-          //Display data
-          M5.Lcd.print(countPerMinute);
+        M5.Lcd.setFreeFont(FF17);  
+        M5.Lcd.print("CPM =");
+        M5.Lcd.setCursor(70,15);
+        // setup for seven segment fonts
+        M5.Lcd.setFreeFont(FF17);
+        //Display data
+        M5.Lcd.print(countPerMinute);
         M5.Lcd.setCursor(0,70);
         M5.Lcd.print("Time: ");
         M5.Lcd.setCursor(50,70);
@@ -381,7 +386,8 @@ void loop() {
     M5.Lcd.print("Background Start");
     background = averageCPM;
   } 
-  totalcount += count;
+  //totalcount += count;
+  //delay(10);
   count = 0;
-  seconds = 60;
+  //seconds = 60;
 }
