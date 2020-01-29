@@ -26,7 +26,7 @@
   float radiationValue = 0.0;
   uint16_t seconds = 60;    
   uint32_t lastTime;
-  float totalcount = 0;
+  long totalcount = 0;
   long totalseconds = 0;
   float totalminutes = 0.0;
   long totalhours = 0;
@@ -43,6 +43,7 @@
 void IRAM_ATTR detectsPulse() {
   //Count the pulses routine
   count++;
+  totalcount++;
 }
 
 void setup(void) {
@@ -125,7 +126,7 @@ void setup(void) {
                     //totalcount++;
                }
                lastcount = count;
-               totalcount = count;
+               ////////////////totalcount = count;
 
         }
       }
@@ -137,19 +138,22 @@ int secondloop(float totalminutes, float count){
     //count=random(40,50);
     
     //add random count plus total counts
-     totalminutes=totalminutes+count;
-
+    totalminutes=totalminutes+count;
+    float countPerMinute = count;
+    float radiationValue = countPerMinute * CONV_FACTOR;
     //serial print the info
-    Serial.print("second loop totalminutes=");
-    Serial.println(totalminutes); 
+    Serial.print("second loop count=");
+    Serial.println(count); 
+    Serial.print("radiationVal from second=");
+    Serial.println(radiationValue); 
 
     //return the random count
-    return totalminutes;
+    return countPerMinute;
 }
-
 
 void loop() {
     M5.update();
+    //float totalcount = totalcount;
     //count=count+random (40,50);
     //display menu of button options
     if (button==0) {
@@ -181,31 +185,32 @@ void loop() {
 //         M5.Speaker.mute();
         M5.Lcd.drawCircle(145, 65, 10, RED); //137
         M5.Lcd.fillCircle(145, 65, 10, RED);
-        totalcount+=count;
         //M5.Lcd.setCursor(100,50);
         //M5.Lcd.fillRect(100, 35, 50, 17, BLACK); //"clear" by overwritting old total with black rect
         //M5.Lcd.setCursor(100,50);
         //M5.Lcd.print(totalcount);
-        delay(500);
+        delay(200);
         M5.Lcd.drawCircle(145, 65, 10, BLACK);
         M5.Lcd.fillCircle(145, 65, 10, BLACK);
         //countPerMinute = count;
 
-
+//////////////totalcount = totalcount + (count - lastcount);
 //Count Sum
     if (button >= 1) {
         M5.Lcd.fillRect(100, 35, 70, 17, BLACK);
         M5.Lcd.setCursor(0,50);
         M5.Lcd.print("Count Sum=");
         M5.Lcd.setCursor(100,50);
-        M5.Lcd.print(totalcount,0);
+        M5.Lcd.print(totalcount);
     }
-     }
-     lastcount = count; 
+  }
+  lastcount = count; 
      
      
     if (millis()-timePreviousMeassure > 60000){
-        secondloop(totalminutes, count);
+        countPerMinute= secondloop(totalminutes, count);
+        float radiationValue = countPerMinute * CONV_FACTOR;
+
         //check return count
         Serial.print ("totalminutes=");
         Serial.println (totalminutes);
@@ -215,8 +220,8 @@ void loop() {
         minutesdisplay++;
         averageCPM = (totalcount/(totalminutes)) - background; //+ (1/60)*seconds);
         float avgradval = averageCPM * CONV_FACTOR; 
-        float countPerMinute = count;
-        float radiationValue = countPerMinute * CONV_FACTOR;
+        //float countPerMinute = count;
+        //float radiationValue = countPerMinute * CONV_FACTOR;
       //setup counting and display sieverts
           
           timePreviousMeassure = millis();
@@ -304,13 +309,13 @@ void loop() {
         M5.Lcd.setCursor(0,50);
         M5.Lcd.print("Count Sum=");
         M5.Lcd.setCursor(100,50);
-        M5.Lcd.print(totalcount, 0);
+        M5.Lcd.print(totalcount);
     }
   count = 0;
   seconds = 60;
     }
     //float countPerMinute = count;
-    //float radiationValue = countPerMinute * CONV_FACTOR;
+    float radiationValue = countPerMinute * CONV_FACTOR;
     float avgradval = averageCPM * CONV_FACTOR;
       //Reset the counts and reset the count down
     //float avgradval = averageCPM * CONV_FACTOR; 
@@ -319,7 +324,7 @@ void loop() {
         M5.Lcd.setCursor(0,50);
         M5.Lcd.print("Count Sum=");
         M5.Lcd.setCursor(100,50);
-        M5.Lcd.print(totalcount, 0);
+        M5.Lcd.print(totalcount);
         M5.Lcd.setCursor(0,15);
         M5.Lcd.print("Avg CPM =");
         M5.Lcd.println(averageCPM, 0);
@@ -376,7 +381,7 @@ void loop() {
         M5.Lcd.setCursor(0,50);
         M5.Lcd.print("Count Sum=");
         M5.Lcd.setCursor(100,50); //110 w/ total count =
-        M5.Lcd.print(totalcount, 0);
+        M5.Lcd.print(totalcount);
         button = 2;
     }
     if (M5.BtnB.wasReleasefor(5000)) { //hold button B down for 5 seconds
@@ -388,6 +393,6 @@ void loop() {
   } 
   //totalcount += count;
   //delay(10);
-  count = 0;
+  //count = 0;
   //seconds = 60;
 }
