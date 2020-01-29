@@ -390,6 +390,10 @@ void loop() {
     M5.Lcd.setCursor(0,15);
     M5.Lcd.print("Background Start");
     background = averageCPM;
+    Serial.print("Background!");
+    Serial.print(background);
+    totalcount = 0;
+    totalminutes = 0;
   } 
   //totalcount += count;
   //delay(10);
