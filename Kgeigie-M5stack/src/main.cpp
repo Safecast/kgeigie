@@ -37,8 +37,10 @@
   long button = 0;
   float background = 0;
   long minind = 0;
-
-
+  const int servo_pin = 26;
+  int freq = 50;
+  int ledChannel = 0;
+  int resolution = 10;
 
 void IRAM_ATTR detectsPulse() {
   //Count the pulses routine
@@ -49,6 +51,8 @@ void IRAM_ATTR detectsPulse() {
 void setup(void) {
   
   M5.begin();
+  ledcSetup(ledChannel, freq, resolution);
+  ledcAttachPin(servo_pin, ledChannel);
 
 //draw Safecast Logo
   M5.Lcd.setFreeFont(FF17);  
@@ -72,6 +76,9 @@ void setup(void) {
         //M5.Lcd.drawCircle(40, 80, 30, BLACK);
         //M5.Lcd.fillCircle(40, 80, 30, BLACK);
       //M5.Speaker.mute();
+    ledcWriteTone(ledChannel, 1000);
+    delay(500);
+    ledcWriteTone(ledChannel, 0);
     delay(3000);
 
   // Reset text padding to zero (default)
@@ -120,7 +127,9 @@ void setup(void) {
         //     
                     M5.Lcd.drawCircle(138, 20, 10, RED);
                     M5.Lcd.fillCircle(138, 20, 10, RED);
-                    delay(500);
+                    ledcWriteTone(ledChannel, 1000);
+                    delay(200);
+                    ledcWriteTone(ledChannel, 0);
                     M5.Lcd.drawCircle(138, 20, 10, BLACK);
                     M5.Lcd.fillCircle(138, 20, 10, BLACK);
                     //totalcount++;
@@ -185,11 +194,13 @@ void loop() {
 //         M5.Speaker.mute();
         M5.Lcd.drawCircle(145, 65, 10, RED); //137
         M5.Lcd.fillCircle(145, 65, 10, RED);
+        ledcWriteTone(ledChannel, 1000);
         //M5.Lcd.setCursor(100,50);
         //M5.Lcd.fillRect(100, 35, 50, 17, BLACK); //"clear" by overwritting old total with black rect
         //M5.Lcd.setCursor(100,50);
         //M5.Lcd.print(totalcount);
         delay(200);
+        ledcWriteTone(ledChannel, 0);
         M5.Lcd.drawCircle(145, 65, 10, BLACK);
         M5.Lcd.fillCircle(145, 65, 10, BLACK);
         //countPerMinute = count;
