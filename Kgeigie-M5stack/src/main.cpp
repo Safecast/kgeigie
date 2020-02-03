@@ -1,10 +1,9 @@
 //**************************************************// 
 //    Display for kGeigie (kids Geiger Counter)     //
-//                  Version 1.0                     //
+//                    V2.0.0                        //
 // Intended for breadboard assembly with M5 Stick-C //
 //     Reads CPM, uSv/h, Avg CPM, and Avg uSv/h     //
 //        Includes background count feature         //
-//                  Version 3.0.0                   //
 //                                                  //
 //   written by Rob Oudendijk and Catherine Mohr    //
 //     Contact email: catherinermohr@gmail.com      //
