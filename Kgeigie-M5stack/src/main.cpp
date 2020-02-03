@@ -1,4 +1,16 @@
-// Test for displaying CPM and uS/h for kGeigie
+//**************************************************// 
+//    Display for kGeigie (kids Geiger Counter)     //
+//                  Version 1.0                     //
+// Intended for breadboard assembly with M5 Stick-C //
+//     Reads CPM, uSv/h, Avg CPM, and Avg uSv/h     //
+//        Includes background count feature         //
+//                  Version 3.0.0                   //
+//                                                  //
+//   written by Rob Oudendijk and Catherine Mohr    //
+//     Contact email: catherinermohr@gmail.com      //
+//          Copyright (c) 2020, Safecast            //        
+//              All rights reserved.                //
+//**************************************************//
 
 #include <M5StickC.h>
 #include <FreeSevenSegNumFont.h>
@@ -31,7 +43,7 @@
   float avgradval = 0.0;
   long button = 0;
   float background = 0;
-  ////////// sound variables////////////
+  //**sound variables**//
   const int servo_pin = 26; //connect speaker in port G26
   int freq = 50;
   int ledChannel = 0;
@@ -107,7 +119,7 @@ void setup(void) {
                if (lastcount<count) {  
                     M5.Lcd.fillCircle(138, 20, 10, RED);
                     ledcWriteTone(ledChannel, 1000);
-                    delay(200);
+                    delay(50);
                     ledcWriteTone(ledChannel, 0);
                     M5.Lcd.fillCircle(138, 20, 10, BLACK);
                }
@@ -152,7 +164,7 @@ void loop() {
      if (lastcount<count) {
         M5.Lcd.fillCircle(145, 65, 10, RED);
         ledcWriteTone(ledChannel, 1000);
-        delay(200);
+        delay(50);
         ledcWriteTone(ledChannel, 0);
         M5.Lcd.fillCircle(145, 65, 10, BLACK);
 //Print Count Sum after every beep (if not on button menu)
@@ -268,14 +280,12 @@ void loop() {
         M5.Lcd.fillRect(0, 0, 200, 200, BLACK);
         M5.Lcd.setCursor(0,30);
         M5.Lcd.print("uSv/h =");
-        M5.Lcd.setCursor(70,30);
         //Display data 
-          M5.Lcd.print(radiationValue,3);
+        M5.Lcd.println(radiationValue,3);
         M5.Lcd.setCursor(0,15);
         M5.Lcd.print("CPM =");
-        M5.Lcd.setCursor(70,15);
         //Display data
-        M5.Lcd.print(countPerMinute);
+        M5.Lcd.println(countPerMinute);
         M5.Lcd.setCursor(0,70);
         M5.Lcd.print("Time: ");
         M5.Lcd.setCursor(50,70);
