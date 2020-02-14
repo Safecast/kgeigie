@@ -47,6 +47,9 @@
   int freq = 50;
   int ledChannel = 0;
   int resolution = 10;
+  //**battery**//
+  double vbat = 0.0; // battery voltage
+  float timebuttonpress = 0;
 
 void IRAM_ATTR detectsPulse() {
   //Count the pulses routine
@@ -143,6 +146,30 @@ int secondloop(float totalminutes, float count){
 
 void loop() {
     M5.update();
+    vbat = M5.Axp.GetVbatData() * 1.1 / 1000; //get voltage of battery
+    M5.Lcd.drawRect(128, 0, 25, 15, WHITE);
+    M5.Lcd.fillRect(153, 5, 2.5, 5, WHITE);
+    if (vbat > 3.825) {
+      //M5.Lcd.print("100%");
+      M5.Lcd.fillRect(130, 2.5, 21, 10, GREEN);
+    }
+    else if (vbat > 3.7) {
+      //M5.Lcd.print("75%");
+      M5.Lcd.fillRect(145, 2.5, 6, 10, BLACK);
+      M5.Lcd.fillRect(130, 2.5, 15, 10, GREEN);
+    }
+    else if (vbat > 3.6) {
+      M5.Lcd.fillRect(140, 2.5, 6, 10, BLACK);
+      M5.Lcd.fillRect(130, 2.5, 10, 10, YELLOW);
+    }
+    else if (vbat > 3.5) {
+      M5.Lcd.fillRect(135, 2.5, 6, 10, BLACK);
+      M5.Lcd.fillRect(130, 2.5, 5, 10, RED);
+    }
+    else{
+      M5.Lcd.fillRect(130, 2.5, 5, 10, BLACK);
+      
+    }
     //display menu of button options
     if (button==0) {
     M5.Lcd.setCursor(0,15); //51
@@ -158,6 +185,9 @@ void loop() {
     if (minutesdisplay >= 60) {
         totalhours = totalhours + 1;
         minutesdisplay = 0;
+    }
+    if (timebuttonpress >= 3){
+      M5.Axp.ScreenBreath(7);
     }
 //   //Beep and display red circle when count detected
      if (lastcount<count) {
@@ -189,6 +219,7 @@ void loop() {
         //continue
         totalminutes++; //for calculating avg CPM
         minutesdisplay++; //for displaying time
+        timebuttonpress++;
         averageCPM = (totalcount/(totalminutes)) - background; //+ (1/60)*seconds);
         float avgradval = averageCPM * CONV_FACTOR;  // Avg uSv/h
       //setup counting and display sieverts
@@ -212,10 +243,10 @@ void loop() {
     if (button == 1) {
         M5.Lcd.fillRect(0, 0, 200, 35, BLACK);
         M5.Lcd.setCursor(0,15);
-        M5.Lcd.print("Avg CPM =");
+        M5.Lcd.print("Av CPM =");
         M5.Lcd.println(averageCPM, 0);
         M5.Lcd.setCursor(0,30);
-        M5.Lcd.print("Avg uSv/h =");
+        M5.Lcd.print("Av uSv/h =");
         M5.Lcd.println(avgradval,3);
     }
     if (button ==2){
@@ -259,10 +290,10 @@ void loop() {
         M5.Lcd.setCursor(100,50);
         M5.Lcd.print(totalcount);
         M5.Lcd.setCursor(0,15);
-        M5.Lcd.print("Avg CPM =");
+        M5.Lcd.print("Av CPM =");
         M5.Lcd.println(averageCPM, 0);
         M5.Lcd.setCursor(0,30);
-        M5.Lcd.print("Avg uSv/h =");
+        M5.Lcd.print("Av uSv/h =");
         M5.Lcd.println(avgradval, 3);
         M5.Lcd.setCursor(0,70);
         M5.Lcd.print("Time: ");
@@ -273,6 +304,8 @@ void loop() {
         M5.Lcd.print(minutesdisplay);
         M5.Lcd.println("m");
         button = 1;
+        timebuttonpress = 0;
+        M5.Axp.ScreenBreath(15);
     }
     //Display current CPM measured if button B (side) pressed
     if (M5.BtnB.wasReleased()) {
@@ -298,6 +331,8 @@ void loop() {
         M5.Lcd.setCursor(100,50);
         M5.Lcd.print(totalcount);
         button = 2;
+        timebuttonpress = 0;
+        M5.Axp.ScreenBreath(15);
     }
     //hold button B down for 5 seconds to set avg CPM as background
     if (M5.BtnB.wasReleasefor(5000)) { 
@@ -310,5 +345,7 @@ void loop() {
     Serial.print(background);
     totalcount = 0;
     totalminutes = 0;
+    timebuttonpress = 0;
+    M5.Axp.ScreenBreath(15);
   } 
 }
