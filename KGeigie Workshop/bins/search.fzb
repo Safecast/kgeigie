@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module fritzingVersion="0.9.4.2019-12-01.CD-498-0-a1ffcea" icon="Search.png" search="probe">
+    <title>Search</title>
+    <instances>
+        <instance moduleIdRef="STM32_Nucleo_board" modelIndex="85412291" path="/private/var/folders/db/5vfwj4ks5bsffmg7y5d91c4h0000gn/T/AppTranslocation/53B6FEA8-AF48-4CAB-86AA-3781177181BF/d/Fritzing.app/Contents/MacOS/fritzing-parts/core/STM32_Nucleo_board.fzp">
+            <views/>
+        </instance>
+        <instance moduleIdRef="SparkFun_Soil_Moisture_Sensor" modelIndex="85412293" path="/private/var/folders/db/5vfwj4ks5bsffmg7y5d91c4h0000gn/T/AppTranslocation/53B6FEA8-AF48-4CAB-86AA-3781177181BF/d/Fritzing.app/Contents/MacOS/fritzing-parts/core/SparkFun_Soil_Moisture_Sensor.fzp">
+            <views/>
+        </instance>
+    </instances>
+</module>
