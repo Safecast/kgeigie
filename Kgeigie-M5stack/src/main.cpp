@@ -84,7 +84,7 @@ void setup(void) {
               lastcount = count;
 
           //Display safecast copyright
-               M5.Lcd.drawString("SAFECAST 2019", 170, 210, GFXFF);
+               M5.Lcd.drawString("SAFECAST 2022", 170, 210, GFXFF);
 
         }
       }
