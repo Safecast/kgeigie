@@ -38,7 +38,6 @@
       9,
       10,
       11,
-      12,
       13,
       14,
       15,
@@ -69,15 +68,15 @@
   "project": {
     "files": [
       {
-        "name": "kGeigie.kicad_pcb",
+        "name": "kGeigie.kicad_sch",
         "open": false,
         "window": {
-          "display": 0,
+          "display": 1,
           "maximized": true,
-          "pos_x": 0,
-          "pos_y": 215,
+          "pos_x": 320,
+          "pos_y": 240,
           "size_x": 1280,
-          "size_y": 672
+          "size_y": 720
         }
       }
     ]
