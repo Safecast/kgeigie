@@ -134,7 +134,7 @@ void loop() {
           M5.Lcd.print(radiationValue,3);
 
       //Display safecast copyright
-          M5.Lcd.drawString("SAFECAST 2019", 170, 210, GFXFF);// Print the string name of the font
+          M5.Lcd.drawString("SAFECAST 2022", 170, 210, GFXFF);// Print the string name of the font
       
       //Reset the counts and reset the count down
           count = 0;
