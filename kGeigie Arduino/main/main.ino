@@ -67,7 +67,7 @@ void setup(void) {
 
           //display welcome and countdown
               M5.Lcd.setFreeFont(FF18);  
-              M5.Lcd.drawString("kGeigie counter V0.1",40, 80, GFXFF);// Print the string name of the font  
+              M5.Lcd.drawString("kGeigie counter V1",40, 80, GFXFF);// Print the string name of the font  
               M5.Lcd.setFreeFont(FF17);  
               M5.Lcd.drawString("Countdown", 10,210, GFXFF);  
 
