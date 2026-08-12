@@ -73,7 +73,7 @@ void setup(void) {
   M5.Lcd.setCursor(55,30); //51
   M5.Lcd.print("SAFECAST");
   M5.Lcd.setCursor(80,50);
-  M5.Lcd.print("2020");
+  M5.Lcd.print("2026");
 
   //Beeps at startup
     ledcWriteTone(ledChannel, 1000);
@@ -115,7 +115,7 @@ void setup(void) {
               M5.Lcd.fillRect(100, 18, 24, 17, BLACK);
               M5.Lcd.print(seconds);
         //Display safecast copyright
-              M5.Lcd.drawString("SAFECAST 2020", 0, 50, GFXFF);
+              M5.Lcd.drawString("SAFECAST 2026", 0, 50, GFXFF);
 
         // Beep and display red circle when count detected
                if (lastcount<count) {  
